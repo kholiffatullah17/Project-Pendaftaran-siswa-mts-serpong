@@ -1905,3 +1905,83 @@ p {
   color: var(--white);
   background-color: var(--primary-dark);
 }
+
+/*===========================
+  POPUP MODAL PROMO / PPDB CSS
+===========================*/
+.promo-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Latar belakang redup */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999; /* Memastikan pop-up paling depan */
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Class aktif untuk menampilkan modal */
+.promo-modal-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.promo-modal-content {
+  position: relative;
+  max-width: 500px;
+  width: 90%;
+  background: var(--white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transform: scale(0.8);
+  transition: all 0.3s ease-in-out;
+}
+
+.promo-modal-overlay.show .promo-modal-content {
+  transform: scale(1);
+}
+
+.promo-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.promo-img:hover {
+  transform: scale(1.02); /* Efek zoom tipis saat hovered */
+}
+
+/* Tombol Tanda Silang (X) */
+.promo-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: rgba(0, 0, 0, 0.6);
+  color: var(--white);
+  border: none;
+  font-size: 28px;
+  font-weight: bold;
+  line-height: 1;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.promo-close-btn:hover {
+  background: var(--error); /* Warna merah saat ditunjuk cursor */
+  color: var(--white);
+}

@@ -56,7 +56,9 @@
                 <li class="nav-item">
                   <a class="page-scroll" href="#profil">Profil</a>
                 </li>
-
+                <li class="nav-item">
+                  <a class="page-scroll" href="#ekstrakurikuler">Ekstrakurikuler</a>
+                </li>
                 <li class="nav-item">
                   <a class="page-scroll" href="#pricing">Pricing</a>
                 </li>
@@ -99,6 +101,11 @@
           <li><a href="javascript:void(0)">Our Team</a></li>
           <li><a href="javascript:void(0)">Latest News</a></li>
           <li><a href="javascript:void(0)">Contact Us</a></li>
+          <li class="mt-3">
+      <button type="button" class="btn primary-btn w-100 btn-sm" id="openLoginBtn">
+        <i class="lni lni-user me-1"></i> Masuk / Login
+      </button>
+    </li>
         </ul>
       </div>
       <!-- menu -->
@@ -902,11 +909,76 @@
   </footer>
   <!--/ End Footer Area -->
 
-	
-
   <a href="#" class="scroll-top btn-hover">
     <i class="lni lni-chevron-up"></i>
   </a>
+
+<!--====== POPUP BANNER PROMO / PPDB START ======-->
+<div id="promoModal" class="promo-modal-overlay">
+  <div class="promo-modal-content">
+    <!-- Tombol Silang untuk Menutup -->
+    <button class="promo-close-btn" id="closePromoBtn">&times;</button>
+    
+    <!-- Link Gambar Mengarah ke Pendaftaran -->
+    <a href="registrasi.html">
+      <img src="assets/images/header/hero-image.jpg" alt="Pendaftaran PPDB MTs Serpong" class="promo-img" />
+    </a>
+  </div>
+</div>
+<!--====== POPUP BANNER PROMO / PPDB END ======-->
+
+<!--====== LOGIN MODAL START ======-->
+<div id="loginModal" class="login-modal-overlay">
+  <div class="login-modal-content">
+    <!-- Tombol Close Modal -->
+    <button type="button" class="login-close-btn" id="closeLoginBtn">&times;</button>
+    
+    <div class="p-4">
+      <div class="text-center mb-4">
+        <h3 class="fw-bold text-success">Login PPDB</h3>
+        <p class="text-muted text-small">Masuk ke akun pendaftaran MTs Serpong</p>
+      </div>
+
+      <form action="#" method="POST" id="loginForm">
+        <!-- Input Username / Email / NISN -->
+        <div class="mb-3 text-start">
+          <label for="loginUser" class="form-label fw-semibold">Email / NISN *</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="lni lni-user"></i></span>
+            <input type="text" class="form-control" id="loginUser" placeholder="Masukkan Email / NISN" required />
+          </div>
+        </div>
+
+        <!-- Input Password -->
+        <div class="mb-3 text-start">
+          <label for="loginPassword" class="form-label fw-semibold">Kata Sandi *</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="lni lni-lock"></i></span>
+            <input type="password" class="form-control" id="loginPassword" placeholder="Masukkan kata sandi" required />
+          </div>
+        </div>
+
+        <!-- Lupa Password & Remember Me -->
+        <div class="d-flex justify-content-between align-items-center mb-4 text-small">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="rememberMe">
+            <label class="form-check-label" for="rememberMe">Ingat Saya</label>
+          </div>
+          <a href="javascript:void(0)" class="text-success fw-semibold">Lupa Sandi?</a>
+        </div>
+
+        <!-- Tombol Submit -->
+        <button type="submit" class="btn primary-btn w-100 py-2">Masuk SEKARANG</button>
+      </form>
+
+      <div class="text-center mt-4 pt-3 border-top">
+        <p class="text-small mb-0">Belum memiliki akun? <a href="register.html" class="text-success fw-bold">Daftar PPDB</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+<!--====== LOGIN MODAL END ======-->
+
 
   <!--====== js ======-->
   <script src="assets/js/bootstrap.bundle.min.js"></script>
@@ -915,26 +987,72 @@
   <script src="assets/js/tiny-slider.js"></script>
 
   <script>
-<!--====== POPUP BANNER PROMO / PPDB START ======-->
-<div id="promoModal" class="promo-modal-overlay">
-  <div class="promo-modal-content">
-    <!-- Tombol Silang untuk Menutup -->
-    <button class="promo-close-btn" id="closePromoBtn">&times;</button>
-    
-    <!-- Link Gambar Mengarah ke Pendaftaran -->
-    <a href="register.html">
-      <img src="assets/images/header/hero-image.jpg" alt="Pendaftaran PPDB MTs Serpong" class="promo-img" />
-    </a>
-  </div>
-</div>
-<!--====== POPUP BANNER PROMO / PPDB END ======-->
-    //===== close navbar-collapse when a  clicked
-    let navbarTogglerNine = document.querySelector(
-      ".navbar-nine .navbar-toggler"
-    );
-    navbarTogglerNine.addEventListener("click", function () {
-      navbarTogglerNine.classList.toggle("active");
+    document.addEventListener("DOMContentLoaded", function () {
+      let promoModal = document.getElementById("promoModal");
+      let closePromoBtn = document.getElementById("closePromoBtn");
+
+      if (promoModal && closePromoBtn) {
+        // Tampilkan modal
+        setTimeout(function () {
+          promoModal.classList.add("show");
+        }, 500);
+
+        // Tombol close
+        closePromoBtn.addEventListener("click", function () {
+          promoModal.classList.remove("show");
+        });
+
+        // Klik area luar
+        promoModal.addEventListener("click", function (e) {
+          if (e.target === promoModal) {
+            promoModal.classList.remove("show");
+          }
+        });
+      } else {
+        console.error("Element ID promoModal atau closePromoBtn tidak ditemukan!");
+      }
     });
+
+    document.addEventListener("DOMContentLoaded", function () {
+  let openLoginBtn = document.getElementById("openLoginBtn");
+  let closeLoginBtn = document.getElementById("closeLoginBtn");
+  let loginModal = document.getElementById("loginModal");
+  let sidebarLeft = document.querySelector(".sidebar-left");
+  let overlayLeft = document.querySelector(".overlay-left");
+
+  // Buka modal login dan tutup sidebar
+  if (openLoginBtn && loginModal) {
+    openLoginBtn.addEventListener("click", function () {
+      // 1. Tutup sidebar menu jika sedang terbuka
+      if (sidebarLeft && overlayLeft) {
+        sidebarLeft.classList.remove("open");
+        overlayLeft.classList.remove("open");
+      }
+      
+      // 2. Tampilkan modal login
+      loginModal.classList.add("show");
+    });
+  }
+
+  // Tutup modal login via tombol X
+  if (closeLoginBtn) {
+    closeLoginBtn.addEventListener("click", function () {
+      loginModal.classList.remove("show");
+    });
+  }
+
+  // Tutup modal jika user mengklik area gelap di luar modal
+  if (loginModal) {
+    loginModal.addEventListener("click", function (e) {
+      if (e.target === loginModal) {
+        loginModal.classList.remove("show");
+      }
+    });
+  }
+});
+  </script>
+
+  <script>
 
     // ==== left sidebar toggle
     let sidebarLeft = document.querySelector(".sidebar-left");
@@ -967,28 +1085,7 @@
       'autoplayVideos': true,
     });
 
-    // ===== SCRIPT POPUP BANNER otomatis muncul saat halaman dimuat =====
-document.addEventListener("DOMContentLoaded", function () {
-  let promoModal = document.getElementById("promoModal");
-  let closePromoBtn = document.getElementById("closePromoBtn");
-
-  // Tampilkan pop-up setelah halaman selesai dimuat (delay 500ms agar halus)
-  setTimeout(function () {
-    promoModal.classList.add("show");
-  }, 500);
-
-  // Fungsi menutup pop-up saat tombol (X) diklik
-  closePromoBtn.addEventListener("click", function () {
-    promoModal.classList.remove("show");
-  });
-
-  // Tutup pop-up juga jika user mengklik area luar gambar
-  promoModal.addEventListener("click", function (e) {
-    if (e.target === promoModal) {
-      promoModal.classList.remove("show");
-    }
-  });
-});
+    
   </script>
 </body>
 

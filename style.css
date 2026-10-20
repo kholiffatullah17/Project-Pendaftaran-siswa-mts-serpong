@@ -1982,7 +1982,6 @@ p {
 }
 
 .promo-close-btn:hover {
-  background: var(--error); /* Warna merah saat ditunjuk cursor */
   color: var(--white);
 }
 

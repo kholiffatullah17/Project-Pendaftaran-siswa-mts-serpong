@@ -400,7 +400,7 @@ p {
 /*===== NAVBAR NINE =====*/
 .navbar-area.navbar-nine {
   background: var(--primary);
-  padding: 10px 0;
+  padding: 1px 0;
   position: absolute;
   left: 0;
   top: 0;

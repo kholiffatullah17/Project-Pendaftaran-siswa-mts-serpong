@@ -1963,12 +1963,12 @@ p {
 .promo-close-btn {
   position: absolute;
   top: 10px;
-  right: 15px;
+  right: 10px;
   background: rgba(0, 0, 0, 0.6);
   color: var(--white);
   border: none;
-  font-size: 28px;
-  font-weight: bold;
+  font-size: 25px;
+  font-weight: regular;
   line-height: 1;
   width: 20px;
   height: 20px;
@@ -1983,6 +1983,7 @@ p {
 
 .promo-close-btn:hover {
   color: var(--white);
+  background: var(--error);
 }
 
 /*===========================
